@@ -11,10 +11,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "description": {
-      "type": "text"
+    "bio": {
+      "type": "richtext"
     },
     "stats": {
+      "type": "json"
+    },
+    "techStack": {
+      "type": "json"
+    },
+    "journey": {
       "type": "json"
     }
   }

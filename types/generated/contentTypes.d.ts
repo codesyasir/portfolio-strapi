@@ -441,15 +441,52 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    bio: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    journey: Schema.Attribute.JSON;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     stats: Schema.Attribute.JSON;
+    techStack: Schema.Attribute.JSON;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Schema.Attribute.String;
+    content: Schema.Attribute.RichText;
+    coverImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    excerpt: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    readTime: Schema.Attribute.String;
+    seo: Schema.Attribute.JSON;
+    slug: Schema.Attribute.String;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -529,6 +566,7 @@ export interface ApiHeroHero extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    availableForWork: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -537,11 +575,49 @@ export interface ApiHeroHero extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    tagline: Schema.Attribute.String;
+    tagline: Schema.Attribute.Text;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPluginPlugin extends Struct.CollectionTypeSchema {
+  collectionName: 'plugins';
+  info: {
+    displayName: 'Plugin';
+    pluralName: 'plugins';
+    singularName: 'plugin';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desc: Schema.Attribute.Text;
+    downloads: Schema.Attribute.String;
+    file: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::plugin.plugin'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    screenshot: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    tags: Schema.Attribute.JSON;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['plugin', 'theme']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.String;
   };
 }
 
@@ -559,7 +635,8 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    desc: Schema.Attribute.Text;
+    featured: Schema.Attribute.Boolean;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -577,12 +654,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiSkillSkill extends Struct.CollectionTypeSchema {
-  collectionName: 'skills';
+export interface ApiSeoSeo extends Struct.SingleTypeSchema {
+  collectionName: 'seos';
   info: {
-    displayName: 'Skill';
-    pluralName: 'skills';
-    singularName: 'skill';
+    displayName: 'Seo';
+    pluralName: 'seos';
+    singularName: 'seo';
   };
   options: {
     draftAndPublish: true;
@@ -591,12 +668,18 @@ export interface ApiSkillSkill extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    level: Schema.Attribute.Integer;
+    defaultOgImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    googleAnalyticsId: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::skill.skill'> &
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::seo.seo'> &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    siteDescription: Schema.Attribute.Text;
+    siteTitle: Schema.Attribute.String;
+    siteUrl: Schema.Attribute.String;
+    twitterHandle: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1115,11 +1198,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::blog.blog': ApiBlogBlog;
       'api::contact-message.contact-message': ApiContactMessageContactMessage;
       'api::contact.contact': ApiContactContact;
       'api::hero.hero': ApiHeroHero;
+      'api::plugin.plugin': ApiPluginPlugin;
       'api::project.project': ApiProjectProject;
-      'api::skill.skill': ApiSkillSkill;
+      'api::seo.seo': ApiSeoSeo;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

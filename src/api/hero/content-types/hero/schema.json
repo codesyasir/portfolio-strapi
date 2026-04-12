@@ -18,7 +18,10 @@
       "type": "string"
     },
     "tagline": {
-      "type": "string"
+      "type": "text"
+    },
+    "availableForWork": {
+      "type": "boolean"
     }
   }
 }

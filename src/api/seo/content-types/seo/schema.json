@@ -1,29 +1,29 @@
 {
-  "kind": "collectionType",
-  "collectionName": "projects",
+  "kind": "singleType",
+  "collectionName": "seos",
   "info": {
-    "singularName": "project",
-    "pluralName": "projects",
-    "displayName": "Project"
+    "singularName": "seo",
+    "pluralName": "seos",
+    "displayName": "Seo"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "siteTitle": {
       "type": "string"
     },
-    "desc": {
+    "siteDescription": {
       "type": "text"
     },
-    "tags": {
-      "type": "json"
-    },
-    "link": {
+    "siteUrl": {
       "type": "string"
     },
-    "image": {
+    "twitterHandle": {
+      "type": "string"
+    },
+    "defaultOgImage": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -33,8 +33,8 @@
         "audios"
       ]
     },
-    "featured": {
-      "type": "boolean"
+    "googleAnalyticsId": {
+      "type": "string"
     }
   }
 }
